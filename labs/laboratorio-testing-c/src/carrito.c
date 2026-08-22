@@ -21,6 +21,7 @@ int carrito_contar(Carrito *c) {
 int carrito_total(Carrito *c) {
     int total = 0;
     for (int i = 0; i < c->cantidad; i++) {
+        if(c->items[i].cantidad <= 0) continue;  /* BUG: no sumar productos con cantidad <= 0 */
         total += c->items[i].precio * c->items[i].cantidad;  /* BUG: falta multiplicar por cantidad */
     }
     return total;
@@ -29,3 +30,13 @@ int carrito_total(Carrito *c) {
 int carrito_descuento(int total, int porcentaje) {
     return total - (total * porcentaje / 100);
 }
+
+int carrito_buscar(Carrito *c, char *nombre) {
+    for(int i=0; i < c->cantidad; i++){
+        if(strcmp(c->items[i].nombre, nombre) == 0){
+            return i;
+        }
+    };
+    return -1;  /* Producto no encontrado */
+};
+

@@ -429,4 +429,8 @@ Para ver los resultados:
 
 **E3** — Deliberadamente escribí un test que falle (ponés un valor incorrecto en `ASSERT_IGUAL`). Corré los tests y observá el mensaje de error. ¿Qué información da el framework? Luego revertí el cambio.
 
+ > R: [FAIL] carrito_total(&c) => esperado 500, obtenido 700  (linea 132).
+
 **E4** — Investigá qué es **TDD** (Test Driven Development). ¿En qué orden se escribe el código? ¿En qué se diferencia de lo que hiciste en este laboratorio?
+
+ > R: El orden en el que se escribe el código con TDD (Test Driven Development) es, primero, escribir los tests y luego modificar el código con la mínima cantidad de cambios necesarios para que el test funcione correctamente, y así sucesivamente.

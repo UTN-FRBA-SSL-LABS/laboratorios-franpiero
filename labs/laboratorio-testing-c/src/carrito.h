@@ -26,6 +26,9 @@ int carrito_contar(Carrito *c);
 /* Devuelve el precio total del carrito (suma de precio * cantidad de cada producto). */
 int carrito_total(Carrito *c);
 
+/* Devuelve el indice del producto con ese nombre, o -1 si no existe. */
+int carrito_buscar(Carrito *c, char *nombre);
+
 /* Aplica un descuento porcentual al total. Devuelve el precio final.
    porcentaje debe estar entre 0 y 100. */
 int carrito_descuento(int total, int porcentaje);

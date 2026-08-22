@@ -76,6 +76,62 @@ void test_agregar_uno(void) {
 /* TODO: escribir test_carrito_lleno() */
 
 /* ═══════════════════════════════════════════════════════════════════════════
+ *  EJERCITACION EXTRA — Escribir tests adicionales
+ * ═══════════════════════════════════════════════════════════════════════════ */
+
+    void test_carrito_buscar_existe(void){
+        printf("\n=== [buscar producto en carrito] ===\n");
+        Carrito c;
+        carrito_init(&c);
+        Producto p1 = {"Jugo", 300, 1};
+        Producto p2 = {"Leche", 350, 1};
+        Producto p3 = {"Galletitas", 200, 3};
+        carrito_agregar(&c, p1);
+        carrito_agregar(&c, p2);
+        carrito_agregar(&c, p3);
+        ASSERT_IGUAL(1, carrito_buscar(&c, "Leche")); /* Producto encontrado en la posicion 1 */
+    }
+    
+    void test_carrito_buscar_no_existe(void){
+        printf("\n=== [buscar producto que no existe en carrito] ===\n");
+        Carrito c;
+        carrito_init(&c);
+        Producto p1 = {"Jugo", 300, 1};
+        Producto p2 = {"Leche", 350, 1};
+        Producto p3 = {"Galletitas", 200, 3};
+        carrito_agregar(&c, p1);
+        carrito_agregar(&c, p2);
+        carrito_agregar(&c, p3);
+        ASSERT_IGUAL(-1, carrito_buscar(&c, "Pan")); /* Producto no encontrado */
+    }
+
+    void test_carrito_buscar_repetidos(void){
+        printf("\n=== [buscar productos repetidos] ===\n");
+        Carrito c;
+        carrito_init(&c);
+        Producto p1 = {"Jugo", 300, 1};
+        Producto p2 = {"Leche", 350, 1};
+        Producto p3 = {"Jugo", 300, 3};
+        carrito_agregar(&c, p1);
+        carrito_agregar(&c, p2);
+        carrito_agregar(&c, p3);
+        ASSERT_IGUAL(0, carrito_buscar(&c, "Jugo")); /* Producto encontrado en la posicion 0, ya que es el primero en salir*/
+    }
+
+    void test_carrito_total_con_cantidad_cero(void){
+        printf("\n=== [total carrito con cantidad cero] ===\n");
+        Carrito c;
+        carrito_init(&c);
+        Producto p1 = {"Jugo", 300, 0}; /* Producto con cantidad cero */
+        Producto p2 = {"Leche", 350, 2};
+        Producto p3 = {"Galletitas", 200, -3}; /* Producto con cantidad negativa se ignora */
+        carrito_agregar(&c, p1);
+        carrito_agregar(&c, p2);
+        carrito_agregar(&c, p3);
+        ASSERT_IGUAL(700, carrito_total(&c)); /* Total = 0 + 700 = 700 */
+    }
+
+/* ═══════════════════════════════════════════════════════════════════════════
  *  main
  * ═══════════════════════════════════════════════════════════════════════════ */
 
@@ -87,6 +143,11 @@ int main(void) {
     test_total_precio_unitario(); 
     test_total_con_cantidad();
     test_carrito_lleno();
+    /* Tests ejercitacion extra */
+    test_carrito_buscar_existe();
+    test_carrito_buscar_no_existe();
+    test_carrito_buscar_repetidos();
+    test_carrito_total_con_cantidad_cero();
     RESUMEN();
     return EXIT_CODE();
 }
